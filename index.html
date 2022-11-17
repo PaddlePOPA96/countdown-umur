@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="tengah">
+
+    <h2 >BERAPA HARI ULANG TAHUN KAMU</h2>
+
+    <form>
+      <label>Silahkan masukkan tanggal lahir kamu: </label>
+      <br><br>
+      <input id="bday" onblur="calculateDays()" type="date" />
+      <p id="result"></p>
+      
+    </form>
+    
+
+</div>
+</body>
+<script>
+// Enables to choose future dates
+(function () {
+  let today = new Date();
+  document.getElementById("bday").max = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + (today.getDate() < 10 ? ("0" + (today.getDate()-1)) : (today.getDate()-1));
+})();
+
+function calculateDays() {
+  let today = new Date();
+  let bday = new Date(document.getElementById("bday").value); 
+  let age = today.getFullYear() - bday.getFullYear();
+  
+  let upcomingBday = new Date(today.getFullYear(), bday.getMonth(), bday.getDate());
+  
+  if(today > upcomingBday) {
+    upcomingBday.setFullYear(today.getFullYear() + 1);
+  }
+  
+  var one_day = 24 * 60 * 60 * 1000;
+  
+  let daysLeft = Math.ceil((upcomingBday.getTime() - today.getTime()) / (one_day));
+  
+  if (daysLeft && age < 200) {
+    document.getElementById("result").innerText = `di ${daysLeft} hari lagi, kamu akan menginjak umur ke- ${age + 1}!`;  
+  } else {
+    document.getElementById("result").innerText = "Please enter a valid birtday.";
+  }
+  
+
+}
+    </script>
+
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            justify-items: center;
+            
+        }
+        h2{
+            color: aliceblue;
+        }
+        label{
+            color: antiquewhite;
+        }
+
+        p{
+            color: rgb(233, 233, 1);
+            padding-top: 10px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .tengah{
+            background-color: rgb(5, 54, 54);
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            padding: 10px;
+            text-align: center;
+            margin: 110px;
+            border-radius: 20px;
+        }
+
+
+    </style>
+</html>
